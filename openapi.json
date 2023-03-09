@@ -2,7 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "B2B Taxi v2",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "description": ""
   },
   "servers": [
     {
@@ -13,7 +14,8 @@
     "securitySchemes": {
       "basicAuth": {
         "type": "http",
-        "scheme": "basic"
+        "scheme": "basic",
+        "description": ""
       },
       "Token": {
         "name": "Token",
@@ -56,6 +58,9 @@
         "security": [
           {
             "basicAuth": []
+          },
+          {
+            "Token": []
           }
         ],
         "parameters": [],
@@ -78,6 +83,9 @@
         "security": [
           {
             "basicAuth": []
+          },
+          {
+            "Token": []
           }
         ],
         "parameters": [],
@@ -112,18 +120,12 @@
         "security": [
           {
             "basicAuth": []
-          }
-        ],
-        "parameters": [
+          },
           {
-            "name": "Token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "9F1159B7E67F141ECCE70995AE03281AFC9355AE"
+            "Token": []
           }
         ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
