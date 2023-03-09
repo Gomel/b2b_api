@@ -15,13 +15,13 @@
       "basicAuth": {
         "type": "http",
         "scheme": "basic",
-        "description": ""
+        "description": "B2B / B2B"
       },
       "Token": {
         "name": "Token",
         "type": "apiKey",
         "in": "header",
-        "description": "Токен получаемый с запроса авторизации"
+        "description": "Токен получаемый с запроса авторизации. Пример = 9F1159B7E67F141ECCE70995AE03281AFC9355AE"
       }
     }
   },
@@ -30,7 +30,7 @@
       "basicAuth": []
     },
     {
-      "API Key": []
+      "Token": []
     }
   ],
   "paths": {
@@ -42,58 +42,315 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "example": {
-                  "Логин": "max_6",
-                  "ИНН": "000000000000",
-                  "КонтактноеЛицо": "Шелест",
-                  "МобильныйТелефонРБ": "+375295555555",
-                  "НаименованиеОрганизации": "Трололо",
-                  "Почта": "max@gmail.com",
-                  "АдресДоставки": "пер.Козлова, 25"
+                "properties": {
+                  "Логин": {
+                    "type": "string"
+                  },
+                  "ИНН": {
+                    "type": "string"
+                  },
+                  "КонтактноеЛицо": {
+                    "type": "string"
+                  },
+                  "МобильныйТелефонРБ": {
+                    "type": "string"
+                  },
+                  "НаименованиеОрганизации": {
+                    "type": "string"
+                  },
+                  "Почта": {
+                    "type": "string"
+                  },
+                  "АдресДоставки": {
+                    "type": "string"
+                  }
+                },
+                "x-examples": {
+                  "Example 1": {
+                    "Логин": "max_6",
+                    "ИНН": "000000000000",
+                    "КонтактноеЛицо": "Шелест",
+                    "МобильныйТелефонРБ": "+375295555555",
+                    "НаименованиеОрганизации": "Трололо",
+                    "Почта": "max@gmail.com",
+                    "АдресДоставки": "пер.Козлова, 25"
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "Логин": "test",
+                    "ИНН": "000000000000",
+                    "КонтактноеЛицо": "Дзержинский",
+                    "МобильныйТелефонРБ": "+375295555555",
+                    "НаименованиеОрганизации": "РогаИКопыта",
+                    "Почта": "lenin@gmail.com",
+                    "АдресДоставки": "пер.Коммунистический, 25"
+                  }
                 }
               }
             }
           }
         },
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "Token": []
-          }
-        ],
         "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "ok": true,
+                      "result": {
+                        "userID": "8e409f7a-be89-11ed-8d92-005056ae85a8"
+                      },
+                      "ErrorCode": "5",
+                      "Error": "Текст ошибки"
+                    }
+                  },
+                  "properties": {
+                    "ok": {
+                      "type": "boolean",
+                      "description": "Отработало или нет"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "userID": {
+                          "type": "string",
+                          "description": "ID пользователя"
+                        }
+                      }
+                    },
+                    "Error": {
+                      "type": "string",
+                      "description": "Описание ошибки"
+                    },
+                    "ErrorCode": {
+                      "type": "string",
+                      "description": "Код ошибки"
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "result"
+                  ]
+                },
+                "examples": {
+                  "Пример": {
+                    "value": {
+                      "ok": true,
+                      "result": {
+                        "userID": "8e409f7a-be89-11ed-8d92-005056ae85a8"
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         },
         "tags": [
           "user"
-        ]
+        ],
+        "description": "Регистрация нового пользователя B2B"
       }
     },
     "/hs/catalog/v2/user/{id}": {
       "get": {
         "summary": "Данные пользователя",
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "Token": []
-          }
-        ],
         "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "ok": true,
+                      "result": {
+                        "userID": "a768b81b-ed7b-11ec-8d88-005056ae85a8",
+                        "Менеджер": "Петушков Андрей",
+                        "МенеджерТелефон": "",
+                        "МенеджерПочта": "",
+                        "Недействителен": false,
+                        "Логин": "",
+                        "Email": "",
+                        "КонтактноеЛицо": "Денис Малейко",
+                        "Телефон": "",
+                        "ТелефонSMS": "+375 (29) 134-62-96",
+                        "Почта": "den.1990@bk.ru",
+                        "Договоры": [
+                          {
+                            "ContractID": "0000263625",
+                            "Наименование": "000004 от 01.01.2021",
+                            "НомерДоговора": "000004",
+                            "Организация": "ТрайдексБелПлюс ООО",
+                            "ОрганизацияКод": 1,
+                            "ДатаДоговора": "2021-01-01T00:00:00",
+                            "ВалютаДоговора": "BYN",
+                            "ВидЦены": "VIP_БН",
+                            "ЦенаВключаетНДС": true,
+                            "КонтрагентКод": "0000018195",
+                            "Контрагент": "ЗАО \"Облрапсагросервис\"",
+                            "СрокРезерва": 3,
+                            "СтоимостьРезерва": 0,
+                            "НаличныйРасчет": false,
+                            "БалансДоговора": 1944.91
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "properties": {
+                    "ok": {
+                      "type": "boolean",
+                      "description": "Отработало или нет"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "userID": {
+                          "type": "string",
+                          "description": "ID пользователя"
+                        },
+                        "Менеджер": {
+                          "type": "string"
+                        },
+                        "МенеджерТелефон": {
+                          "type": "string"
+                        },
+                        "МенеджерПочта": {
+                          "type": "string"
+                        },
+                        "Недействителен": {
+                          "type": "boolean"
+                        },
+                        "Логин": {
+                          "type": "string"
+                        },
+                        "Email": {
+                          "type": "string"
+                        },
+                        "КонтактноеЛицо": {
+                          "type": "string"
+                        },
+                        "Телефон": {
+                          "type": "string"
+                        },
+                        "ТелефонSMS": {
+                          "type": "string"
+                        },
+                        "Почта": {
+                          "type": "string"
+                        },
+                        "Договоры": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "ContractID": {
+                                "type": "string",
+                                "description": "Код договора"
+                              },
+                              "Наименование": {
+                                "type": "string"
+                              },
+                              "НомерДоговора": {
+                                "type": "string"
+                              },
+                              "Организация": {
+                                "type": "string"
+                              },
+                              "ОрганизацияКод": {
+                                "type": "integer"
+                              },
+                              "ДатаДоговора": {
+                                "type": "string"
+                              },
+                              "ВалютаДоговора": {
+                                "type": "string"
+                              },
+                              "ВидЦены": {
+                                "type": "string"
+                              },
+                              "ЦенаВключаетНДС": {
+                                "type": "boolean"
+                              },
+                              "КонтрагентКод": {
+                                "type": "string"
+                              },
+                              "Контрагент": {
+                                "type": "string"
+                              },
+                              "СрокРезерва": {
+                                "type": "integer"
+                              },
+                              "СтоимостьРезерва": {
+                                "type": "integer"
+                              },
+                              "НаличныйРасчет": {
+                                "type": "boolean"
+                              },
+                              "БалансДоговора": {
+                                "type": "number"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "result"
+                  ]
+                },
+                "examples": {
+                  "Пример": {
+                    "value": {
+                      "ok": true,
+                      "result": {
+                        "userID": "a768b81b-ed7b-11ec-8d88-005056ae85a8",
+                        "Менеджер": "Петушков Андрей",
+                        "МенеджерТелефон": "",
+                        "МенеджерПочта": "",
+                        "Недействителен": false,
+                        "Логин": "",
+                        "Email": "",
+                        "КонтактноеЛицо": "Денис Малейко",
+                        "Телефон": "",
+                        "ТелефонSMS": "+375 (29) 134-62-96",
+                        "Почта": "den.1990@bk.ru",
+                        "Договоры": [
+                          {
+                            "ContractID": "0000263625",
+                            "Наименование": "000004 от 01.01.2021",
+                            "НомерДоговора": "000004",
+                            "Организация": "ТрайдексБелПлюс ООО",
+                            "ОрганизацияКод": 1,
+                            "ДатаДоговора": "2021-01-01T00:00:00",
+                            "ВалютаДоговора": "BYN",
+                            "ВидЦены": "VIP_БН",
+                            "ЦенаВключаетНДС": true,
+                            "КонтрагентКод": "0000018195",
+                            "Контрагент": "ЗАО \"Облрапсагросервис\"",
+                            "СрокРезерва": 3,
+                            "СтоимостьРезерва": 0,
+                            "НаличныйРасчет": false,
+                            "БалансДоговора": 1944.91
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         },
@@ -117,14 +374,6 @@
     "/hs/catalog/v2/users": {
       "get": {
         "summary": "Список всех пользователей",
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "Token": []
-          }
-        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -136,30 +385,14 @@
         },
         "tags": [
           "user"
-        ]
+        ],
+        "description": "Все пользователи B2B"
       }
     },
     "/hs/catalog/v2/item/{id}": {
       "get": {
-        "tags": [
-          "default"
-        ],
         "summary": "Карточка номенклатуры",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "Token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "9F1159B7E67F141ECCE70995AE03281AFC9355AE"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -167,7 +400,11 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "description": "",
+        "tags": [
+          "Номенклатура"
+        ]
       },
       "parameters": [
         {
@@ -183,9 +420,6 @@
     },
     "/hs/catalog/v2/items": {
       "get": {
-        "tags": [
-          "default"
-        ],
         "summary": "Номенклатура",
         "parameters": [],
         "responses": {
@@ -193,18 +427,7 @@
             "description": "Successful response",
             "content": {
               "application/json": {
-                "examples": {
-                  "Example 1": {
-                    "value": {
-                      "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
-                      "contractID": "0000264170",
-                      "fields": [
-                        "ГарантийныйСрок"
-                      ],
-                      "group": "0000000001"
-                    }
-                  }
-                }
+                "examples": {}
               }
             }
           }
@@ -240,7 +463,7 @@
                   },
                   "group": {
                     "type": "string",
-                    "description": "Группа номенклатуры"
+                    "description": "Группа номенклатуры (0000000001 - вся номенклатура)"
                   },
                   "fields": {
                     "type": "array",
@@ -261,29 +484,42 @@
                   "userID",
                   "contractID"
                 ]
+              },
+              "examples": {
+                "Вся номенклатура": {
+                  "value": {
+                    "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
+                    "contractID": "0000264170",
+                    "fields": [
+                      "ГарантийныйСрок"
+                    ],
+                    "group": "0000000001"
+                  }
+                },
+                "Список номенклатуры": {
+                  "value": {
+                    "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
+                    "contractID": "0000264170",
+                    "items": [
+                      "0000156038",
+                      "0000213872"
+                    ]
+                  }
+                }
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Номенклатура"
+        ]
       },
       "parameters": []
     },
     "/hs/catalog/v2/items-all": {
       "get": {
-        "tags": [
-          "default"
-        ],
         "summary": "Номенклатура без цен",
-        "parameters": [
-          {
-            "name": "Token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "9F1159B7E67F141ECCE70995AE03281AFC9355AE"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -291,7 +527,11 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "tags": [
+          "Номенклатура"
+        ],
+        "deprecated": true
       },
       "parameters": []
     },
@@ -301,21 +541,7 @@
           "default"
         ],
         "summary": "Контрагенты",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "Token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "9F1159B7E67F141ECCE70995AE03281AFC9355AE"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -340,21 +566,7 @@
     "/hs/catalog/v2/order-status-list": {
       "get": {
         "summary": "Список статусов заказа",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "Token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "9F1159B7E67F141ECCE70995AE03281AFC9355AE"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -377,16 +589,7 @@
             "basicAuth": []
           }
         ],
-        "parameters": [
-          {
-            "name": "Token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "9F1159B7E67F141ECCE70995AE03281AFC9355AE"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -442,16 +645,7 @@
             "basicAuth": []
           }
         ],
-        "parameters": [
-          {
-            "name": "Token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "9F1159B7E67F141ECCE70995AE03281AFC9355AE"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -477,7 +671,6 @@
       ],
       "delete": {
         "summary": "Поставить/удалить пометку на удаление в заказе",
-        "operationId": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -499,14 +692,6 @@
         ],
         "parameters": [
           {
-            "name": "Token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "9F1159B7E67F141ECCE70995AE03281AFC9355AE"
-          },
-          {
             "name": "status",
             "in": "query",
             "schema": {
@@ -525,12 +710,13 @@
         },
         "tags": [
           "order"
-        ]
+        ],
+        "description": "Получение списка заказов"
       }
     },
     "/hs/catalog/v2/order-merge": {
       "post": {
-        "summary": "order-merge - объеденить заказы",
+        "summary": "Объеденить заказы",
         "requestBody": {
           "content": {
             "application/json": {
@@ -553,16 +739,7 @@
             "basicAuth": []
           }
         ],
-        "parameters": [
-          {
-            "name": "Token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "9F1159B7E67F141ECCE70995AE03281AFC9355AE"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -573,14 +750,12 @@
         },
         "tags": [
           "order"
-        ]
+        ],
+        "description": ""
       }
     },
     "/hs/catalog/v2/supplier-order": {
       "put": {
-        "tags": [
-          "default"
-        ],
         "summary": "Создать заказ поставщику",
         "requestBody": {
           "content": {
@@ -617,16 +792,7 @@
             "basicAuth": []
           }
         ],
-        "parameters": [
-          {
-            "name": "Token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "9F1159B7E67F141ECCE70995AE03281AFC9355AE"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -635,30 +801,21 @@
             }
           }
         },
-        "description": ""
+        "description": "",
+        "tags": [
+          "order"
+        ]
       }
     },
     "/hs/catalog/v2/supplier-order/{id}": {
       "get": {
-        "tags": [
-          "default"
-        ],
         "summary": "Заказ поставщику",
         "security": [
           {
             "basicAuth": []
           }
         ],
-        "parameters": [
-          {
-            "name": "Token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "9F1159B7E67F141ECCE70995AE03281AFC9355AE"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -667,7 +824,10 @@
             }
           }
         },
-        "description": "Получить заказ поставщику"
+        "description": "Получить заказ поставщику",
+        "tags": [
+          "order"
+        ]
       },
       "patch": {
         "tags": [
@@ -711,16 +871,7 @@
             "basicAuth": []
           }
         ],
-        "parameters": [
-          {
-            "name": "Token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "9F1159B7E67F141ECCE70995AE03281AFC9355AE"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -740,16 +891,7 @@
             "basicAuth": []
           }
         ],
-        "parameters": [
-          {
-            "name": "Token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "9F1159B7E67F141ECCE70995AE03281AFC9355AE"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -766,31 +908,15 @@
           },
           "name": "id",
           "in": "path",
-          "description": "Заказ поставщику"
+          "description": "Заказ поставщику",
+          "required": true
         }
       ]
     },
     "/hs/catalog/v2/supplier-orders": {
       "get": {
-        "tags": [
-          "default"
-        ],
-        "summary": "supplier-orders - (не работает) Получить все заказы поставщику",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "Token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "9F1159B7E67F141ECCE70995AE03281AFC9355AE"
-          }
-        ],
+        "summary": "(не работает) Получить все заказы поставщику",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -798,7 +924,11 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "deprecated": true,
+        "tags": [
+          "order"
+        ]
       }
     },
     "/hs/catalog/v2/suppliers/{unp}": {
@@ -812,16 +942,7 @@
             "basicAuth": []
           }
         ],
-        "parameters": [
-          {
-            "name": "Token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "9F1159B7E67F141ECCE70995AE03281AFC9355AE"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -850,21 +971,7 @@
           "default"
         ],
         "summary": "Список стран",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "Token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "9F1159B7E67F141ECCE70995AE03281AFC9355AE"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -872,60 +979,49 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "description": "Получение списка стран"
       }
     },
     "/hs/catalog/v2/report/user-history": {
       "get": {
-        "tags": [
-          "default"
-        ],
         "summary": "Отчёт о движениях пользователя",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
         "parameters": [
-          {
-            "name": "Token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "9F1159B7E67F141ECCE70995AE03281AFC9355AE"
-          },
           {
             "name": "userID",
             "in": "query",
             "schema": {
               "type": "string"
             },
-            "example": "35b3c790-4456-11eb-a8aa-0050568e457c"
+            "example": "35b3c790-4456-11eb-a8aa-0050568e457c",
+            "description": "ID пользователя"
           },
           {
             "name": "contractID",
             "in": "query",
             "schema": {
-              "type": "integer"
+              "type": "string"
             },
-            "example": "0000263922"
+            "example": "0000263922",
+            "description": "Код договора"
           },
           {
             "name": "dateBegin",
             "in": "query",
             "schema": {
-              "type": "integer"
+              "type": "string"
             },
-            "example": "20210601"
+            "example": "20210601",
+            "description": "Дата начала"
           },
           {
             "name": "dateEnd",
             "in": "query",
             "schema": {
-              "type": "integer"
+              "type": "string"
             },
-            "example": "20210722"
+            "example": "20210722",
+            "description": "Дата окончания"
           }
         ],
         "responses": {
@@ -936,7 +1032,10 @@
             }
           }
         },
-        "description": ""
+        "description": "",
+        "tags": [
+          "order"
+        ]
       }
     },
     "/hs/catalog/v2/routes": {
@@ -950,16 +1049,7 @@
             "basicAuth": []
           }
         ],
-        "parameters": [
-          {
-            "name": "Token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "0A8AD9325EF7402E857C98A73294C2D1C40AE740"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -967,7 +1057,8 @@
               "application/json": {}
             }
           }
-        }
+        },
+        "description": ""
       }
     },
     "/hs/catalog/v2/delivery-route": {
@@ -976,43 +1067,33 @@
           "default"
         ],
         "summary": "Ближайшие маршруты доставки по городу",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
         "parameters": [
-          {
-            "name": "Token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "0A8AD9325EF7402E857C98A73294C2D1C40AE740"
-          },
           {
             "name": "organizationID",
             "in": "query",
             "schema": {
-              "type": "integer"
+              "type": "string"
             },
-            "example": "1"
+            "example": "1",
+            "description": "Код организации"
           },
           {
             "name": "cityID",
             "in": "query",
             "schema": {
-              "type": "integer"
+              "type": "string"
             },
-            "example": "50000000000000"
+            "example": "50000000000000",
+            "description": "Код города"
           },
           {
             "name": "date",
             "in": "query",
             "schema": {
-              "type": "integer"
+              "type": "string"
             },
-            "example": "20210503"
+            "example": "20210503",
+            "description": "Дата "
           }
         ],
         "responses": {
