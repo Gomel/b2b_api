@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "B2B Taxi v2",
+    "title": "B2B Taxi",
     "version": "1.0.0",
     "description": ""
   },
@@ -153,10 +153,10 @@
             }
           }
         },
+        "description": "Регистрация нового пользователя B2B",
         "tags": [
-          "user"
-        ],
-        "description": "Регистрация нового пользователя B2B"
+          "Пользователи"
+        ]
       }
     },
     "/hs/catalog/v2/user/{id}": {
@@ -356,7 +356,7 @@
         },
         "description": "Получить данные пользователя",
         "tags": [
-          "user"
+          "Пользователи"
         ]
       },
       "parameters": [
@@ -383,10 +383,10 @@
             }
           }
         },
+        "description": "Все пользователи B2B",
         "tags": [
-          "user"
-        ],
-        "description": "Все пользователи B2B"
+          "Пользователи"
+        ]
       }
     },
     "/hs/catalog/v2/item/{id}": {
@@ -512,7 +512,8 @@
         },
         "tags": [
           "Номенклатура"
-        ]
+        ],
+        "x-internal": false
       },
       "parameters": []
     },
@@ -546,11 +547,95 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "examples": {
+                  "Пример": {
+                    "value": {
+                      "ok": true,
+                      "result": {
+                        "Код": "0000000041",
+                        "Наименование": "ПРИКОЛОВ\"",
+                        "ЮридическоеНаименование": "ОДО \"ПРИКОЛОВ\"",
+                        "АдресЮридический": "220000 г. Минск, пер. Уральский, 17-555",
+                        "АдресРазгрузкиТТН": "",
+                        "УНП": "190788525",
+                        "ОКПО": "3771188050",
+                        "Email": "pricolov@mail.ru",
+                        "АдресРазгрузкиФактический": "",
+                        "АдресПочтовый": ""
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "ok": true,
+                      "result": {
+                        "Код": "0000000041",
+                        "Наименование": "ПРИКОЛОВ\"",
+                        "ЮридическоеНаименование": "ОДО \"ПРИКОЛОВ\"",
+                        "АдресЮридический": "220000 г. Минск, пер. Уральский, 17-555",
+                        "АдресРазгрузкиТТН": "",
+                        "УНП": "190788525",
+                        "ОКПО": "3771188050",
+                        "Email": "pricolov@mail.ru",
+                        "АдресРазгрузкиФактический": "",
+                        "АдресПочтовый": ""
+                      }
+                    }
+                  },
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "Код": {
+                          "type": "string"
+                        },
+                        "Наименование": {
+                          "type": "string"
+                        },
+                        "ЮридическоеНаименование": {
+                          "type": "string"
+                        },
+                        "АдресЮридический": {
+                          "type": "string"
+                        },
+                        "АдресРазгрузкиТТН": {
+                          "type": "string"
+                        },
+                        "УНП": {
+                          "type": "string"
+                        },
+                        "ОКПО": {
+                          "type": "string"
+                        },
+                        "Email": {
+                          "type": "string"
+                        },
+                        "АдресРазгрузкиФактический": {
+                          "type": "string"
+                        },
+                        "АдресПочтовый": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "result"
+                  ]
+                }
+              }
             }
           }
         },
-        "description": "Получение списка контрагента или данных по отдельному контрагенту, если указан id"
+        "description": "Получение данных по контрагенту"
       },
       "parameters": [
         {
@@ -559,7 +644,8 @@
           },
           "name": "id",
           "in": "path",
-          "description": "ID контрагента"
+          "description": "ID контрагента",
+          "required": true
         }
       ]
     },
@@ -571,7 +657,65 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "examples": {
+                  "Пример": {
+                    "value": {
+                      "ok": true,
+                      "result": [
+                        "Новый",
+                        "Отменен",
+                        "Отменен менеджером",
+                        "В резерве",
+                        "В резерве частично",
+                        "Собирается складом",
+                        "Ожидает доставки",
+                        "В доставке",
+                        "Ожидает клиента",
+                        "Выполнен",
+                        "Удалён"
+                      ]
+                    }
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "ok": true,
+                      "result": [
+                        "Новый",
+                        "Отменен",
+                        "Отменен менеджером",
+                        "В резерве",
+                        "В резерве частично",
+                        "Собирается складом",
+                        "Ожидает доставки",
+                        "В доставке",
+                        "Ожидает клиента",
+                        "Выполнен",
+                        "Удалён"
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "result": {
+                      "type": "array",
+                      "description": "Список статусов",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "result"
+                  ]
+                }
+              }
             }
           }
         },
@@ -584,23 +728,279 @@
     "/hs/catalog/v2/order/{id}": {
       "get": {
         "summary": "Получить заказ покупателя",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
         "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "examples": {
+                  "Пример": {
+                    "value": {
+                      "ok": true,
+                      "result": {
+                        "ID": "87c6d773-ee27-11ec-8d88-005056ae85a8",
+                        "Номер": "0000077412",
+                        "Дата": "2022-06-29T14:48:00",
+                        "ДатаСоздания": "2022-06-17T13:23:30",
+                        "Менеджер": "Марачковский Владимир",
+                        "КодДоговора": "0000264170",
+                        "КодКонтрагента": "0000014914",
+                        "НаименованиеКонтрагента": "1_Григорий",
+                        "Валюта": "USD",
+                        "СуммаНДС": 0,
+                        "СуммаДокумента": 1200,
+                        "СуммаРезерва": 1400,
+                        "Комментарий": "",
+                        "КомментарийСклад": "\n",
+                        "ПометкаУдаления": false,
+                        "Проведен": true,
+                        "Стартован": false,
+                        "СтатусWMS": "Новый",
+                        "ВидДоставки": "Самовывоз",
+                        "Статус": "В резерве частично",
+                        "Водитель": "",
+                        "Телефон": "",
+                        "Автомобиль": "",
+                        "СписанМенеджером": "",
+                        "ОтгруженСкладом": "",
+                        "ПринятВодителем": "",
+                        "ДоставленВодителем": "",
+                        "ДатаИстеченияРезерва": "2022-06-30T05:36:00",
+                        "Товары": [
+                          {
+                            "НоменклатураКод": "0000210949",
+                            "idCatalog": 0,
+                            "НоменклатураНаименование": "ViewSonic 27\" VG2748 (16:9, IPS, HAS, VGA, HDMI, DP, USB)",
+                            "ХарактеристикаКод": "",
+                            "ХарактеристикаНаименование": "",
+                            "idЗаказное": "",
+                            "Количество": 3,
+                            "КоличествоРезерв": 3,
+                            "Всего": 600,
+                            "Цена": 200
+                          },
+                          {
+                            "НоменклатураКод": "0000214380",
+                            "idCatalog": 191381,
+                            "НоменклатураНаименование": "Philips 34\" 345E2AE/00 (21:9, IPS 4K 75Hz, Adaptive Sync, HAS, 2xHDMI, DP, speakers)",
+                            "ХарактеристикаКод": "",
+                            "ХарактеристикаНаименование": "",
+                            "idЗаказное": "",
+                            "Количество": 2,
+                            "КоличествоРезерв": 2,
+                            "Всего": 600,
+                            "Цена": 300
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "ID": {
+                          "type": "string"
+                        },
+                        "Номер": {
+                          "type": "string"
+                        },
+                        "Дата": {
+                          "type": "string"
+                        },
+                        "ДатаСоздания": {
+                          "type": "string"
+                        },
+                        "Менеджер": {
+                          "type": "string"
+                        },
+                        "КодДоговора": {
+                          "type": "string"
+                        },
+                        "КодКонтрагента": {
+                          "type": "string"
+                        },
+                        "НаименованиеКонтрагента": {
+                          "type": "string"
+                        },
+                        "Валюта": {
+                          "type": "string"
+                        },
+                        "СуммаНДС": {
+                          "type": "integer"
+                        },
+                        "СуммаДокумента": {
+                          "type": "integer"
+                        },
+                        "СуммаРезерва": {
+                          "type": "integer"
+                        },
+                        "Комментарий": {
+                          "type": "string"
+                        },
+                        "КомментарийСклад": {
+                          "type": "string"
+                        },
+                        "ПометкаУдаления": {
+                          "type": "boolean"
+                        },
+                        "Проведен": {
+                          "type": "boolean"
+                        },
+                        "Стартован": {
+                          "type": "boolean"
+                        },
+                        "СтатусWMS": {
+                          "type": "string"
+                        },
+                        "ВидДоставки": {
+                          "type": "string"
+                        },
+                        "Статус": {
+                          "type": "string"
+                        },
+                        "Водитель": {
+                          "type": "string"
+                        },
+                        "Телефон": {
+                          "type": "string"
+                        },
+                        "Автомобиль": {
+                          "type": "string"
+                        },
+                        "СписанМенеджером": {
+                          "type": "string"
+                        },
+                        "ОтгруженСкладом": {
+                          "type": "string"
+                        },
+                        "ПринятВодителем": {
+                          "type": "string"
+                        },
+                        "ДоставленВодителем": {
+                          "type": "string"
+                        },
+                        "ДатаИстеченияРезерва": {
+                          "type": "string"
+                        },
+                        "Товары": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "НоменклатураКод": {
+                                "type": "string"
+                              },
+                              "idCatalog": {
+                                "type": "integer"
+                              },
+                              "НоменклатураНаименование": {
+                                "type": "string"
+                              },
+                              "ХарактеристикаКод": {
+                                "type": "string"
+                              },
+                              "ХарактеристикаНаименование": {
+                                "type": "string"
+                              },
+                              "idЗаказное": {
+                                "type": "string"
+                              },
+                              "Количество": {
+                                "type": "integer"
+                              },
+                              "КоличествоРезерв": {
+                                "type": "integer"
+                              },
+                              "Всего": {
+                                "type": "integer"
+                              },
+                              "Цена": {
+                                "type": "integer"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "ok": true,
+                      "result": {
+                        "ID": "87c6d773-ee27-11ec-8d88-005056ae85a8",
+                        "Номер": "0000077412",
+                        "Дата": "2022-06-29T14:48:00",
+                        "ДатаСоздания": "2022-06-17T13:23:30",
+                        "Менеджер": "Марачковский Владимир",
+                        "КодДоговора": "0000264170",
+                        "КодКонтрагента": "0000014914",
+                        "НаименованиеКонтрагента": "1_Григорий",
+                        "Валюта": "USD",
+                        "СуммаНДС": 0,
+                        "СуммаДокумента": 1200,
+                        "СуммаРезерва": 1400,
+                        "Комментарий": "",
+                        "КомментарийСклад": "\n",
+                        "ПометкаУдаления": false,
+                        "Проведен": true,
+                        "Стартован": false,
+                        "СтатусWMS": "Новый",
+                        "ВидДоставки": "Самовывоз",
+                        "Статус": "В резерве частично",
+                        "Водитель": "",
+                        "Телефон": "",
+                        "Автомобиль": "",
+                        "СписанМенеджером": "",
+                        "ОтгруженСкладом": "",
+                        "ПринятВодителем": "",
+                        "ДоставленВодителем": "",
+                        "ДатаИстеченияРезерва": "2022-06-30T05:36:00",
+                        "Товары": [
+                          {
+                            "НоменклатураКод": "0000210949",
+                            "idCatalog": 0,
+                            "НоменклатураНаименование": "ViewSonic 27\" VG2748 (16:9, IPS, HAS, VGA, HDMI, DP, USB)",
+                            "ХарактеристикаКод": "",
+                            "ХарактеристикаНаименование": "",
+                            "idЗаказное": "",
+                            "Количество": 3,
+                            "КоличествоРезерв": 3,
+                            "Всего": 600,
+                            "Цена": 200
+                          },
+                          {
+                            "НоменклатураКод": "0000214380",
+                            "idCatalog": 191381,
+                            "НоменклатураНаименование": "Philips 34\" 345E2AE/00 (21:9, IPS 4K 75Hz, Adaptive Sync, HAS, 2xHDMI, DP, speakers)",
+                            "ХарактеристикаКод": "",
+                            "ХарактеристикаНаименование": "",
+                            "idЗаказное": "",
+                            "Количество": 2,
+                            "КоличествоРезерв": 2,
+                            "Всего": 600,
+                            "Цена": 300
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         },
         "tags": [
           "order"
-        ]
+        ],
+        "description": "Получение заказа покупателя"
       },
       "patch": {
         "summary": "Изменить заказ покупателя",
@@ -609,54 +1009,223 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "example": {
-                  "Header": {
-                    "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
-                    "contractID": "0000264170",
-                    "Address": "Коммунистическая",
-                    "Comment": "Это тест API"
-                  },
-                  "Items": [
-                    {
-                      "PRODUCT_ID": "0000210949",
-                      "NUMBER_ID": "",
-                      "COUNT": 1
+                "x-examples": {
+                  "Example 1": {
+                    "Header": {
+                      "thisService": true,
+                      "contractID": "0000264170",
+                      "Address": "Коммунистическая",
+                      "Comment": "Это тест API"
                     },
-                    {
-                      "idCatalog": 204845,
-                      "NUMBER_ID": "",
-                      "COUNT": 1,
-                      "Цена": 100
-                    },
-                    {
-                      "PRODUCT_ID": "0000214380",
-                      "NUMBER_ID": "",
-                      "COUNT": 1,
-                      "idЗаказное": "213213213213"
+                    "Items": [
+                      {
+                        "PRODUCT_ID": "0000214380",
+                        "NUMBER_ID": "",
+                        "COUNT": 1
+                      },
+                      {
+                        "idCatalog": "277371",
+                        "COUNT": 1
+                      },
+                      {
+                        "idЗаказное": "123123123",
+                        "COUNT": 1
+                      }
+                    ],
+                    "delivery": {
+                      "date": "2021-05-03T00:00:00",
+                      "city": 50000000000000,
+                      "route": "e19d6325-9063-11ea-a870-000c29f9ebc9"
                     }
-                  ]
+                  }
+                },
+                "properties": {
+                  "Header": {
+                    "type": "object",
+                    "required": [
+                      "userID",
+                      "contractID",
+                      "Address",
+                      "Comment"
+                    ],
+                    "properties": {
+                      "userID": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "k1hwuqqox8b5a"
+                        }
+                      },
+                      "contractID": {
+                        "type": "string"
+                      },
+                      "Address": {
+                        "type": "string"
+                      },
+                      "Comment": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "Items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "PRODUCT_ID": {
+                          "type": "string"
+                        },
+                        "NUMBER_ID": {
+                          "type": "string",
+                          "description": "Код характеристики"
+                        },
+                        "COUNT": {
+                          "type": "integer"
+                        },
+                        "idCatalog": {
+                          "type": "string",
+                          "description": "ID catalog.app"
+                        },
+                        "idЗаказное": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "COUNT"
+                      ]
+                    }
+                  },
+                  "delivery": {
+                    "type": "object",
+                    "properties": {
+                      "date": {
+                        "type": "string"
+                      },
+                      "city": {
+                        "type": "integer"
+                      },
+                      "route": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "Header",
+                  "Items"
+                ]
+              },
+              "examples": {
+                "Пример с доставкой": {
+                  "value": {
+                    "Header": {
+                      "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
+                      "contractID": "0000264170",
+                      "Address": "Коммунистическая",
+                      "Comment": "Это тест API"
+                    },
+                    "Items": [
+                      {
+                        "PRODUCT_ID": "0000210949",
+                        "NUMBER_ID": "",
+                        "COUNT": 1
+                      }
+                    ],
+                    "delivery": {
+                      "date": "2021-05-03T00:00:00",
+                      "city": 50000000000000,
+                      "route": "e19d6325-9063-11ea-a870-000c29f9ebc9"
+                    }
+                  }
+                },
+                "Пример самовывоз": {
+                  "value": {
+                    "Header": {
+                      "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
+                      "contractID": "0000264170",
+                      "Address": "Коммунистическая",
+                      "Comment": "Это тест API"
+                    },
+                    "Items": [
+                      {
+                        "PRODUCT_ID": "0000210949",
+                        "NUMBER_ID": "",
+                        "COUNT": 1
+                      }
+                    ]
+                  }
                 }
               }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object"
+              }
             }
-          }
+          },
+          "description": ""
         },
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
         "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "ok": false,
+                      "result": {
+                        "orderID": "0000077507"
+                      },
+                      "ErrorCode": "5",
+                      "Error": "Ошибка проведения документа: \nТовары на складах: Нет остатка для резервирования!\n\tОрганизация: ТрайдексБелПлюс ООО\n\tНоменклатура: [ViewSonic 27\" VG2748 (16:9, IPS, HAS, VGA, HDMI, DP, USB)] 0000210949\n\tХарактеристика: \n\tТребуется: 1\n\tВ Наличии: 0\n\tВ Резервах: 21\n\nТовары на складах: Нет остатка для резервирования!\n\tОрганизация: ТрайдексБелПлюс ООО\n\tНоменклатура: [ViewSonic 27\" VG2748 (16:9, IPS, HAS, VGA, HDMI, DP, USB)] 0000210949\n\tХарактеристика: \n\tТребуется: 1\n\tВ Наличии: 0\n\tВ Резервах: 21\n"
+                    }
+                  },
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "orderID": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "ErrorCode": {
+                      "type": "string"
+                    },
+                    "Error": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "result"
+                  ]
+                },
+                "examples": {
+                  "Пример с ошибкой": {
+                    "value": {
+                      "ok": false,
+                      "result": {
+                        "orderID": "0000077507"
+                      },
+                      "ErrorCode": "5",
+                      "Error": "Ошибка проведения документа: \nТовары на складах: Нет остатка для резервирования!\n\tОрганизация: ТрайдексБелПлюс ООО\n\tНоменклатура: [ViewSonic 27\" VG2748 (16:9, IPS, HAS, VGA, HDMI, DP, USB)] 0000210949\n\tХарактеристика: \n\tТребуется: 1\n\tВ Наличии: 0\n\tВ Резервах: 21\n\nТовары на складах: Нет остатка для резервирования!\n\tОрганизация: ТрайдексБелПлюс ООО\n\tНоменклатура: [ViewSonic 27\" VG2748 (16:9, IPS, HAS, VGA, HDMI, DP, USB)] 0000210949\n\tХарактеристика: \n\tТребуется: 1\n\tВ Наличии: 0\n\tВ Резервах: 21\n"
+                    }
+                  }
+                }
+              }
             }
           }
         },
         "tags": [
           "order"
-        ]
+        ],
+        "description": "Изменение заказа покупателя"
       },
       "parameters": [
         {
@@ -670,15 +1239,26 @@
         }
       ],
       "delete": {
-        "summary": "Поставить/удалить пометку на удаление в заказе",
+        "summary": "Удалить заказ",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "{\n    \"ok\": true,\n    \"result\": {\n        \"ПометкаУдаления\": true\n    }\n}",
+            "headers": {}
           }
         },
-        "description": "",
+        "description": "Поставить / убрать пометку на удаление",
         "tags": [
           "order"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "removeDelete",
+            "description": "Указываем, если нужно снять пометку удаления"
+          }
         ]
       }
     },
@@ -1032,7 +1612,7 @@
             }
           }
         },
-        "description": "",
+        "description": "Выписка по заказу пользователя",
         "tags": [
           "order"
         ]
@@ -1054,11 +1634,96 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "examples": {
+                  "Пример": {
+                    "value": {
+                      "ok": true,
+                      "result": [
+                        {
+                          "route": "Минск",
+                          "routeID": "e19d6325-9063-11ea-a870-000c29f9ebc9",
+                          "cities": [
+                            {
+                              "city": "Минск",
+                              "cityID": 50000000000000
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "ok": true,
+                      "result": [
+                        {
+                          "route": "Минск",
+                          "routeID": "e19d6325-9063-11ea-a870-000c29f9ebc9",
+                          "cities": [
+                            {
+                              "city": "Минск",
+                              "cityID": 50000000000000
+                            }
+                          ]
+                        }
+                      ],
+                      "ErrorCode": "5",
+                      "Error": "Уже есть пользователь с таким логином"
+                    }
+                  },
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "route": {
+                            "type": "string",
+                            "description": "Название маршрута"
+                          },
+                          "routeID": {
+                            "type": "string",
+                            "description": "ID марш"
+                          },
+                          "cities": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "city": {
+                                  "type": "string",
+                                  "description": "Название города"
+                                },
+                                "cityID": {
+                                  "type": "integer",
+                                  "description": "ID города"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ErrorCode": {
+                      "type": "string"
+                    },
+                    "Error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
             }
           }
         },
-        "description": ""
+        "description": "Получение справочника маршрутов"
       }
     },
     "/hs/catalog/v2/delivery-route": {
@@ -1069,7 +1734,7 @@
         "summary": "Ближайшие маршруты доставки по городу",
         "parameters": [
           {
-            "name": "organizationID",
+            "name": "organization",
             "in": "query",
             "schema": {
               "type": "string"
@@ -1078,7 +1743,7 @@
             "description": "Код организации"
           },
           {
-            "name": "cityID",
+            "name": "city",
             "in": "query",
             "schema": {
               "type": "string"
@@ -1100,10 +1765,88 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "examples": {
+                  "Пример": {
+                    "value": {
+                      "ok": true,
+                      "result": [
+                        {
+                          "date": "2021-05-03T00:00:00",
+                          "route": "Минск",
+                          "routeID": "e19d6325-9063-11ea-a870-000c29f9ebc9"
+                        },
+                        {
+                          "date": "2021-05-04T00:00:00",
+                          "route": "Минск",
+                          "routeID": "e19d6325-9063-11ea-a870-000c29f9ebc9"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "ok": true,
+                      "result": [
+                        {
+                          "date": "2021-05-03T00:00:00",
+                          "route": "Минск",
+                          "routeID": "e19d6325-9063-11ea-a870-000c29f9ebc9"
+                        },
+                        {
+                          "date": "2021-05-04T00:00:00",
+                          "route": "Минск",
+                          "routeID": "e19d6325-9063-11ea-a870-000c29f9ebc9"
+                        }
+                      ],
+                      "ErrorCode": "5",
+                      "Error": "Уже есть пользователь с таким логином"
+                    }
+                  },
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "date": {
+                            "type": "string",
+                            "description": "Дата"
+                          },
+                          "route": {
+                            "type": "string",
+                            "description": "Название маршрута"
+                          },
+                          "routeID": {
+                            "type": "string",
+                            "description": "ID маршрута"
+                          }
+                        }
+                      }
+                    },
+                    "ErrorCode": {
+                      "type": "string"
+                    },
+                    "Error": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "result"
+                  ]
+                }
+              }
             }
           }
-        }
+        },
+        "description": ""
       }
     }
   },
