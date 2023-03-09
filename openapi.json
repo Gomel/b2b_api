@@ -419,7 +419,7 @@
       ]
     },
     "/hs/catalog/v2/items": {
-      "get": {
+      "post": {
         "summary": "Номенклатура",
         "parameters": [],
         "responses": {
