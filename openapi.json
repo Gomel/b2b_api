@@ -1281,14 +1281,63 @@
             "schema": {
               "type": "string"
             },
-            "example": "В резерве"
+            "example": "В резерве",
+            "description": "Можно получить в запросе order-status-list"
           }
         ],
         "responses": {
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "users": [
+                        {
+                          "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
+                          "contractID": "0000264170"
+                        },
+                        {
+                          "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
+                          "contractID": "0000264170"
+                        }
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "users": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "userID": {
+                            "type": "string",
+                            "description": "Пользователь B2B"
+                          },
+                          "contractID": {
+                            "type": "string",
+                            "description": "Номер договора"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "По одному пользователю": {
+                    "value": {
+                      "users": [
+                        {
+                          "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
+                          "contractID": "0000264170"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
             }
           }
         },
