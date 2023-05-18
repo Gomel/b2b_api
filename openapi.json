@@ -1339,7 +1339,62 @@
         "tags": [
           "order"
         ],
-        "description": "Получение списка заказов"
+        "description": "Получение списка заказов",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "users": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "userID": {
+                          "type": "string"
+                        },
+                        "contractID": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "x-examples": {
+                  "Example 1": {
+                    "users": [
+                      {
+                        "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
+                        "contractID": "0000264170"
+                      },
+                      {
+                        "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
+                        "contractID": "0000264170"
+                      }
+                    ]
+                  }
+                }
+              },
+              "examples": {
+                "Два пользователя": {
+                  "value": {
+                    "users": [
+                      {
+                        "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
+                        "contractID": "0000264170"
+                      },
+                      {
+                        "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
+                        "contractID": "0000264170"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/hs/catalog/v2/order-merge": {
