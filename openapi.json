@@ -540,6 +540,82 @@
       },
       "parameters": []
     },
+    "/hs/catalog/v2/order-status-list": {
+      "get": {
+        "summary": "Список статусов заказа",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Пример": {
+                    "value": {
+                      "ok": true,
+                      "result": [
+                        "Новый",
+                        "Отменен",
+                        "Отменен менеджером",
+                        "В резерве",
+                        "В резерве частично",
+                        "Собирается складом",
+                        "Ожидает доставки",
+                        "В доставке",
+                        "Ожидает клиента",
+                        "Выполнен",
+                        "Удалён"
+                      ]
+                    }
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "ok": true,
+                      "result": [
+                        "Новый",
+                        "Отменен",
+                        "Отменен менеджером",
+                        "В резерве",
+                        "В резерве частично",
+                        "Собирается складом",
+                        "Ожидает доставки",
+                        "В доставке",
+                        "Ожидает клиента",
+                        "Выполнен",
+                        "Удалён"
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "result": {
+                      "type": "array",
+                      "description": "Список статусов",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "result"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "description": "Доступные статусы заказа",
+        "tags": [
+          "order"
+        ]
+      }
+    },
     "/hs/catalog/v2/partner/{id}": {
       "get": {
         "tags": [
@@ -652,82 +728,6 @@
           "required": true
         }
       ]
-    },
-    "/hs/catalog/v2/order-status-list": {
-      "get": {
-        "summary": "Список статусов заказа",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Пример": {
-                    "value": {
-                      "ok": true,
-                      "result": [
-                        "Новый",
-                        "Отменен",
-                        "Отменен менеджером",
-                        "В резерве",
-                        "В резерве частично",
-                        "Собирается складом",
-                        "Ожидает доставки",
-                        "В доставке",
-                        "Ожидает клиента",
-                        "Выполнен",
-                        "Удалён"
-                      ]
-                    }
-                  }
-                },
-                "schema": {
-                  "type": "object",
-                  "x-examples": {
-                    "Example 1": {
-                      "ok": true,
-                      "result": [
-                        "Новый",
-                        "Отменен",
-                        "Отменен менеджером",
-                        "В резерве",
-                        "В резерве частично",
-                        "Собирается складом",
-                        "Ожидает доставки",
-                        "В доставке",
-                        "Ожидает клиента",
-                        "Выполнен",
-                        "Удалён"
-                      ]
-                    }
-                  },
-                  "properties": {
-                    "ok": {
-                      "type": "boolean"
-                    },
-                    "result": {
-                      "type": "array",
-                      "description": "Список статусов",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "required": [
-                    "ok",
-                    "result"
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "description": "Доступные статусы заказа",
-        "tags": [
-          "order"
-        ]
-      }
     },
     "/hs/catalog/v2/order/{id}": {
       "get": {
@@ -1269,11 +1269,6 @@
     "/hs/catalog/v2/orders": {
       "get": {
         "summary": "Список заказов",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
         "parameters": [
           {
             "name": "status",
@@ -1367,11 +1362,6 @@
             }
           }
         },
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -1423,6 +1413,9 @@
         "security": [
           {
             "basicAuth": []
+          },
+          {
+            "Token": []
           }
         ],
         "parameters": [],
@@ -1443,11 +1436,6 @@
     "/hs/catalog/v2/supplier-order/{id}": {
       "get": {
         "summary": "Заказ поставщику",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -1570,11 +1558,6 @@
           "default"
         ],
         "summary": "Список поставщиков",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -1677,11 +1660,6 @@
           "default"
         ],
         "summary": "Список маршрутов",
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ],
         "parameters": [],
         "responses": {
           "200": {
