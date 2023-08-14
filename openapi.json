@@ -1310,7 +1310,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "20211231"
             },
             "in": "query",
             "name": "DateTo",
@@ -1318,7 +1319,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "20200601"
             },
             "in": "query",
             "name": "DateFrom",
@@ -1326,7 +1328,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "20220624"
             },
             "in": "query",
             "name": "reserve-end",
