@@ -166,7 +166,15 @@
     "/hs/catalog/v2/user/{id}": {
       "get": {
         "summary": "Данные пользователя",
-        "parameters": [],
+        "parameters": [
+          {
+            "schema": {},
+            "in": "query",
+            "name": "show-debt",
+            "description": "Показать задолженность",
+            "allowEmptyValue": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
