@@ -730,7 +730,7 @@
       ]
     },
     "/hs/catalog/v2/order/{id}": {
-      "get": {
+      "post": {
         "summary": "Получить заказ покупателя",
         "parameters": [],
         "responses": {
@@ -1004,7 +1004,36 @@
         "tags": [
           "order"
         ],
-        "description": "Получение заказа покупателя"
+        "description": "Получение заказа покупателя",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "Example 1": {
+                    "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c"
+                  }
+                },
+                "properties": {
+                  "userID": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "userID"
+                ]
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c"
+                  }
+                }
+              }
+            }
+          }
+        }
       },
       "patch": {
         "summary": "Изменить заказ покупателя",
@@ -1267,7 +1296,7 @@
       }
     },
     "/hs/catalog/v2/orders": {
-      "get": {
+      "post": {
         "summary": "Список заказов",
         "parameters": [
           {
@@ -1277,7 +1306,31 @@
               "type": "string"
             },
             "example": "В резерве",
-            "description": "Можно получить в запросе order-status-list"
+            "description": "Статусы через запятую. Можно получить в запросе order-status-list"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "DateTo",
+            "description": "До определённой даты"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "DateFrom",
+            "description": "От определённой даты"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "reserve-end",
+            "description": "окончание резерва"
           }
         ],
         "responses": {
@@ -1423,12 +1476,39 @@
                   }
                 },
                 "examples": {
-                  "По одному пользователю": {
+                  "Пример": {
                     "value": {
-                      "users": [
+                      "ok": true,
+                      "result": [
                         {
-                          "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
-                          "contractID": "0000264170"
+                          "ID": "87c6d773-ee27-11ec-8d88-005056ae85a8",
+                          "Номер": "0000077412",
+                          "Дата": "2022-06-29T14:48:00",
+                          "ДатаСоздания": "2022-06-17T13:23:30",
+                          "Менеджер": "Марачковский Владимир",
+                          "КодДоговора": "0000264170",
+                          "КодКонтрагента": "0000014914",
+                          "НаименованиеКонтрагента": "1_Григорий",
+                          "Валюта": "USD",
+                          "СуммаНДС": 0,
+                          "СуммаДокумента": 1200,
+                          "СуммаРезерва": 1400,
+                          "Комментарий": "",
+                          "КомментарийСклад": "\n",
+                          "ПометкаУдаления": false,
+                          "Проведен": true,
+                          "Стартован": false,
+                          "СтатусWMS": "Новый",
+                          "ВидДоставки": "Самовывоз",
+                          "Статус": "В резерве частично",
+                          "Водитель": "",
+                          "Телефон": "",
+                          "Автомобиль": "",
+                          "СписанМенеджером": "",
+                          "ОтгруженСкладом": "",
+                          "ПринятВодителем": "",
+                          "ДоставленВодителем": "",
+                          "ДатаИстеченияРезерва": "2022-06-30T05:36:00"
                         }
                       ]
                     }
@@ -1447,22 +1527,6 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {
-                  "users": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "userID": {
-                          "type": "string"
-                        },
-                        "contractID": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                },
                 "x-examples": {
                   "Example 1": {
                     "users": [
@@ -1476,6 +1540,19 @@
                       }
                     ]
                   }
+                },
+                "properties": {
+                  "users": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "userID": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
                 }
               },
               "examples": {
@@ -1483,19 +1560,18 @@
                   "value": {
                     "users": [
                       {
-                        "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
-                        "contractID": "0000264170"
+                        "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c"
                       },
                       {
-                        "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
-                        "contractID": "0000264170"
+                        "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c"
                       }
                     ]
                   }
                 }
               }
             }
-          }
+          },
+          "description": ""
         }
       }
     },
