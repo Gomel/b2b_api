@@ -168,7 +168,10 @@
         "summary": "Данные пользователя",
         "parameters": [
           {
-            "schema": {},
+            "schema": {
+              "type": "boolean",
+              "default": "false"
+            },
             "in": "query",
             "name": "show-debt",
             "description": "Показать задолженность",
@@ -2155,11 +2158,9 @@
           },
           "name": "id",
           "in": "path",
-          "description": "ID заказа покупателя",
-          "required": true
+          "description": "ID заказа покупателя"
         }
       ]
     }
-  },
-  "x-internal": false
+  }
 }
