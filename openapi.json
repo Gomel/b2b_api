@@ -170,7 +170,7 @@
           {
             "schema": {
               "type": "boolean",
-              "default": "false"
+              "default": false
             },
             "in": "query",
             "name": "show-debt",
@@ -529,6 +529,152 @@
           "Номенклатура"
         ],
         "x-internal": false
+      },
+      "parameters": []
+    },
+    "/hs/catalog/v2/items-markups": {
+      "post": {
+        "summary": "Наценки",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "ok": true,
+                      "result": [
+                        {
+                          "КодНоменклатуры": "0000002947",
+                          "НаименованиеНоменклатуры": "Номенклатура 0000002947",
+                          "КодХарактеристики": "",
+                          "НаименованиеХарактеристики": "",
+                          "idCatalog": 234536,
+                          "НадбавкаСправочно": "20"
+                        },
+                        {
+                          "КодНоменклатуры": "0000002948",
+                          "НаименованиеНоменклатуры": "Номенклатура 0000002948",
+                          "КодХарактеристики": "",
+                          "НаименованиеХарактеристики": "",
+                          "idCatalog": 234537,
+                          "НадбавкаСправочно": "12"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "ok": true,
+                      "result": [
+                        {
+                          "КодНоменклатуры": "0000002947",
+                          "НаименованиеНоменклатуры": "Номенклатура 0000002947",
+                          "КодХарактеристики": "",
+                          "НаименованиеХарактеристики": "",
+                          "idCatalog": 234536,
+                          "НадбавкаСправочно": ""
+                        },
+                        {
+                          "КодНоменклатуры": "0000002948",
+                          "НаименованиеНоменклатуры": "Номенклатура 0000002948",
+                          "КодХарактеристики": "",
+                          "НаименованиеХарактеристики": "",
+                          "idCatalog": 234537,
+                          "НадбавкаСправочно": ""
+                        }
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "КодНоменклатуры": {
+                            "type": "string"
+                          },
+                          "НаименованиеНоменклатуры": {
+                            "type": "string"
+                          },
+                          "КодХарактеристики": {
+                            "type": "string"
+                          },
+                          "НаименованиеХарактеристики": {
+                            "type": "string"
+                          },
+                          "idCatalog": {
+                            "type": "integer"
+                          },
+                          "НадбавкаСправочно": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-items-markups",
+        "description": "Получение наценок для номенклатуры",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "Example 1": {
+                    "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
+                    "contractID": "0000264170",
+                    "fields": [
+                      "ГарантийныйСрок"
+                    ],
+                    "group": "0000000001",
+                    "items": [
+                      "0000156038"
+                    ]
+                  }
+                },
+                "properties": {
+                  "userID": {
+                    "type": "string",
+                    "description": "ID пользователя"
+                  },
+                  "contractID": {
+                    "type": "string",
+                    "description": "ID договора"
+                  }
+                },
+                "required": [
+                  "userID"
+                ]
+              },
+              "examples": {
+                "Запрос": {
+                  "value": {
+                    "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
+                    "contractID": "0000264170"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Номенклатура"
+        ]
       },
       "parameters": []
     },
@@ -2158,9 +2304,11 @@
           },
           "name": "id",
           "in": "path",
-          "description": "ID заказа покупателя"
+          "description": "ID заказа покупателя",
+          "required": true
         }
       ]
     }
-  }
+  },
+  "x-internal": false
 }
