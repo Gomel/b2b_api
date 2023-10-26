@@ -636,25 +636,43 @@
                 "type": "object",
                 "x-examples": {
                   "Example 1": {
-                    "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
-                    "contractID": "0000264170",
-                    "fields": [
-                      "ГарантийныйСрок"
-                    ],
-                    "group": "0000000001",
-                    "items": [
-                      "0000156038"
-                    ]
+                    "userID": "9369ef57-31d6-11ee-8d95-005056ae85a8",
+                    "contractID": "0000263897",
+                    "Холдинг": true,
+                    "Заказное": true,
+                    "Категорийное": true,
+                    "ЗаказноеЦенаВключаетНДС": true,
+                    "ЗаказноеОплатаНаличными": true
                   }
                 },
                 "properties": {
                   "userID": {
                     "type": "string",
-                    "description": "ID пользователя"
+                    "description": "id пользователя"
                   },
                   "contractID": {
                     "type": "string",
-                    "description": "ID договора"
+                    "description": "код договора"
+                  },
+                  "Холдинг": {
+                    "type": "boolean",
+                    "description": "Отображать товары холдинга. По умолчанию: false"
+                  },
+                  "Заказное": {
+                    "type": "boolean",
+                    "description": "Отображать заказные товары. По умолчанию: false"
+                  },
+                  "Категорийное": {
+                    "type": "boolean",
+                    "description": "Отображать категорийные товары. По умолчанию: true"
+                  },
+                  "ЗаказноеЦенаВключаетНДС": {
+                    "type": "boolean",
+                    "description": "По умолчанию: false"
+                  },
+                  "ЗаказноеОплатаНаличными": {
+                    "type": "boolean",
+                    "description": "По умолчанию: false"
                   }
                 },
                 "required": [
@@ -670,7 +688,8 @@
                 }
               }
             }
-          }
+          },
+          "description": ""
         },
         "tags": [
           "Номенклатура"
@@ -2291,24 +2310,8 @@
             "name": "userID",
             "description": "GUID пользователя B2B"
           }
-        ],
-        "description": "Стартовать продажу по заказу покупателя. \nЗаказ покупателя должен быть проведён, зарезервированы товары и бизнес-процесс не должен быть стартован.\n\nЕсли во время запуска продажи появится ошибка, она выведется в блоке Error, продемонстрировано в примере.\nПри успешном старте продажи вернётся saleID.",
-        "tags": [
-          "order"
         ]
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "id",
-          "in": "path",
-          "description": "ID заказа покупателя",
-          "required": true
-        }
-      ]
+      }
     }
-  },
-  "x-internal": false
+  }
 }
