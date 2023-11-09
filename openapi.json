@@ -532,7 +532,177 @@
       },
       "parameters": []
     },
-    "/hs/catalog/v2/items-markups": {
+    "/hs/catalog/v2/price": {
+      "post": {
+        "summary": "Прайс",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "ok": true,
+                      "result": {
+                        "currency": "BYN",
+                        "price_type": "Вид цены 0000000022",
+                        "items": [
+                          {
+                            "id": "0000002947",
+                            "name": "Номенклатура 0000002947",
+                            "type_id": "",
+                            "type_name": "",
+                            "catalog_id": 234536,
+                            "markups": "",
+                            "price": 4.8,
+                            "rrc": 0,
+                            "qt": 176,
+                            "warranty": 12
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "currency": {
+                          "type": "string",
+                          "description": "Валюта"
+                        },
+                        "price_type": {
+                          "type": "string",
+                          "description": "Тип цены"
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "Код номенклатуры"
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "Название номенклатуры"
+                              },
+                              "type_id": {
+                                "type": "string",
+                                "description": "Код характеристики"
+                              },
+                              "type_name": {
+                                "type": "string",
+                                "description": "Название характеристики"
+                              },
+                              "catalog_id": {
+                                "type": "integer",
+                                "description": "ID Catalog.app"
+                              },
+                              "markups": {
+                                "type": "string",
+                                "description": "Наценка"
+                              },
+                              "price": {
+                                "type": "number",
+                                "description": "Цена"
+                              },
+                              "rrc": {
+                                "type": "integer",
+                                "description": "РРЦ"
+                              },
+                              "qt": {
+                                "type": "integer",
+                                "description": "Количество"
+                              },
+                              "warranty": {
+                                "type": "integer",
+                                "description": "Гарантия, мес"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "ok": true,
+                      "result": {
+                        "currency": "BYN",
+                        "price_type": "Вид цены 0000000022",
+                        "items": [
+                          {
+                            "id": "0000002947",
+                            "name": "Номенклатура 0000002947",
+                            "type_id": "",
+                            "type_name": "",
+                            "catalog_id": 234536,
+                            "markups": "",
+                            "price": 4.8,
+                            "rrc": 0,
+                            "qt": 176,
+                            "warranty": 12
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-price",
+        "description": "Получение прайса",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userID": {
+                    "type": "string"
+                  },
+                  "contractID": {
+                    "type": "string"
+                  }
+                },
+                "x-examples": {
+                  "Example 1": {
+                    "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
+                    "contractID": "0000264170"
+                  }
+                }
+              },
+              "examples": {
+                "Запрос": {
+                  "value": {
+                    "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
+                    "contractID": "0000264170"
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "tags": [
+          "Номенклатура"
+        ]
+      },
+      "parameters": []
+    },
+    "/hs/catalog/v2/items-markups - copy": {
       "post": {
         "summary": "Наценки",
         "parameters": [],
@@ -693,7 +863,10 @@
         },
         "tags": [
           "Номенклатура"
-        ]
+        ],
+        "x-stoplight": {
+          "id": "l7fxpn79pmpvi"
+        }
       },
       "parameters": []
     },
@@ -2310,8 +2483,24 @@
             "name": "userID",
             "description": "GUID пользователя B2B"
           }
+        ],
+        "description": "Стартовать продажу по заказу покупателя. \nЗаказ покупателя должен быть проведён, зарезервированы товары и бизнес-процесс не должен быть стартован.\n\nЕсли во время запуска продажи появится ошибка, она выведется в блоке Error, продемонстрировано в примере.\nПри успешном старте продажи вернётся saleID.",
+        "tags": [
+          "order"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "description": "ID заказа покупателя",
+          "required": true
+        }
+      ]
     }
-  }
+  },
+  "x-internal": false
 }
