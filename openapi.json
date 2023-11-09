@@ -702,7 +702,7 @@
       },
       "parameters": []
     },
-    "/hs/catalog/v2/items-markups - copy": {
+    "/hs/catalog/v2/items-markups": {
       "post": {
         "summary": "Наценки",
         "parameters": [],
@@ -867,25 +867,6 @@
         "x-stoplight": {
           "id": "l7fxpn79pmpvi"
         }
-      },
-      "parameters": []
-    },
-    "/hs/catalog/v2/items-all": {
-      "get": {
-        "summary": "Номенклатура без цен",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "tags": [
-          "Номенклатура"
-        ],
-        "deprecated": true
       },
       "parameters": []
     },
