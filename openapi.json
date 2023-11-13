@@ -669,18 +669,23 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "x-examples": {
+                  "Example 1": {
+                    "userID": "9369ef57-31d6-11ee-8d95-005056ae85a8",
+                    "contractID": "0000263897",
+                    "show_rrc": true
+                  }
+                },
                 "properties": {
                   "userID": {
                     "type": "string"
                   },
                   "contractID": {
                     "type": "string"
-                  }
-                },
-                "x-examples": {
-                  "Example 1": {
-                    "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
-                    "contractID": "0000264170"
+                  },
+                  "show_rrc": {
+                    "type": "boolean",
+                    "description": "Показывать РРЦ"
                   }
                 }
               },
@@ -688,7 +693,8 @@
                 "Запрос": {
                   "value": {
                     "userID": "2fd003f5-95e0-11eb-a8cc-0050568eed8c",
-                    "contractID": "0000264170"
+                    "contractID": "0000264170",
+                    "show_rrc": true
                   }
                 }
               }
@@ -702,7 +708,7 @@
       },
       "parameters": []
     },
-    "/hs/catalog/v2/items-markups": {
+    "/hs/catalog/v2/items-markups - copy": {
       "post": {
         "summary": "Наценки",
         "parameters": [],
@@ -867,6 +873,25 @@
         "x-stoplight": {
           "id": "l7fxpn79pmpvi"
         }
+      },
+      "parameters": []
+    },
+    "/hs/catalog/v2/items-all": {
+      "get": {
+        "summary": "Номенклатура без цен",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "tags": [
+          "Номенклатура"
+        ],
+        "deprecated": true
       },
       "parameters": []
     },
