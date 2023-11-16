@@ -1084,6 +1084,131 @@
         }
       ]
     },
+    "/hs/catalog/v2/order": {
+      "put": {
+        "summary": "Создать заказ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "Example 1": {
+                    "Header": {
+                      "contractID": "0000196302",
+                      "userID": "9369ef57-31d6-11ee-8d95-005056ae85a8",
+                      "Address": "",
+                      "Comment": ""
+                    },
+                    "Items": [
+                      {
+                        "PRODUCT_ID": "0000377923",
+                        "NUMBER_ID": "",
+                        "idCatalog": 0,
+                        "pre_order": "ТоварХолдинга",
+                        "COUNT": "1"
+                      }
+                    ]
+                  }
+                },
+                "properties": {
+                  "Header": {
+                    "type": "object",
+                    "properties": {
+                      "contractID": {
+                        "type": "string"
+                      },
+                      "userID": {
+                        "type": "string"
+                      },
+                      "Comment": {
+                        "type": "string",
+                        "description": "комментарий"
+                      }
+                    },
+                    "required": [
+                      "contractID",
+                      "userID"
+                    ]
+                  },
+                  "Items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "PRODUCT_ID": {
+                          "type": "string",
+                          "description": "код номенклатуры 1с "
+                        },
+                        "NUMBER_ID": {
+                          "type": "string",
+                          "description": "код характеристики 1с"
+                        },
+                        "idCatalog": {
+                          "type": "integer",
+                          "description": "id Catalog.app"
+                        },
+                        "pre_order": {
+                          "type": "string",
+                          "description": "Если товар холдинга, нужно указать \"ТоварХолдинга\""
+                        },
+                        "COUNT": {
+                          "type": "string",
+                          "description": "Количество"
+                        }
+                      },
+                      "required": [
+                        "COUNT"
+                      ]
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "Header": {
+                      "contractID": "0000196302",
+                      "userID": "9369ef57-31d6-11ee-8d95-005056ae85a8",
+                      "Comment": "test api"
+                    },
+                    "Items": [
+                      {
+                        "PRODUCT_ID": "0000377923",
+                        "NUMBER_ID": "",
+                        "COUNT": "1"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "Token": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "description": "",
+        "tags": [
+          "order"
+        ]
+      },
+      "parameters": []
+    },
     "/hs/catalog/v2/order/{id}": {
       "post": {
         "summary": "Получить заказ покупателя",
