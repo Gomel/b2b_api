@@ -1085,8 +1085,11 @@
       ]
     },
     "/hs/catalog/v2/order": {
-      "put": {
+      "post": {
         "summary": "Создать заказ",
+        "x-stoplight": {
+          "id": "fecaa8903f4db"
+        },
         "requestBody": {
           "content": {
             "application/json": {
