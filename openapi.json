@@ -41,9 +41,6 @@
     "/hs/catalog/login": {
       "post": {
         "summary": "Получить токен",
-        "x-stoplight": {
-          "id": "c61049f00b802"
-        },
         "responses": {
           "200": {
             "description": "Ок",
@@ -112,9 +109,6 @@
     "/hs/catalog/refreshToken": {
       "post": {
         "summary": "Обновить токен",
-        "x-stoplight": {
-          "id": "ddf97276617bd"
-        },
         "responses": {
           "200": {
             "description": "Ок",
