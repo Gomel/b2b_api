@@ -155,7 +155,7 @@
               "type": "string"
             },
             "in": "header",
-            "name": "tokenRefresh",
+            "name": "TokenRefresh",
             "description": "Токен, полученный для обновления",
             "required": true
           }
