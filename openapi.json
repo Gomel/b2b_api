@@ -38,6 +38,133 @@
     }
   ],
   "paths": {
+    "/hs/catalog/login": {
+      "get": {
+        "summary": "Получить токен",
+        "responses": {
+          "200": {
+            "description": "Ок",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "access_token": "5D7D3397104E2788B1DB3C6D618235D1A37D8143",
+                      "refresh_token": "B468583547AF7BF1F9FC195D10763BC365393C5D",
+                      "expires_in": 3600
+                    }
+                  },
+                  "properties": {
+                    "access_token": {
+                      "type": "string",
+                      "description": "Токен, для работы с API"
+                    },
+                    "refresh_token": {
+                      "type": "string",
+                      "description": "Для обновления токена"
+                    },
+                    "expires_in": {
+                      "type": "integer",
+                      "description": "Время жизни токена"
+                    }
+                  },
+                  "required": [
+                    "access_token",
+                    "refresh_token",
+                    "expires_in"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-hs-catalog-login",
+        "description": "Получение токена для дальнейшей работы, время жизни токена 60 минут.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "login",
+            "description": "Логин для получения токена",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "password",
+            "description": "Пароль для получения токена",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Авторизация"
+        ]
+      }
+    },
+    "/hs/catalog/refreshToken": {
+      "get": {
+        "summary": "Обновить токен",
+        "responses": {
+          "200": {
+            "description": "Ок",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "access_token": "5D7D3397104E2788B1DB3C6D618235D1A37D8143",
+                      "refresh_token": "B468583547AF7BF1F9FC195D10763BC365393C5D",
+                      "expires_in": 3600
+                    }
+                  },
+                  "properties": {
+                    "access_token": {
+                      "type": "string",
+                      "description": "Токен для доступа к API"
+                    },
+                    "refresh_token": {
+                      "type": "string",
+                      "description": "Для обновления токена"
+                    },
+                    "expires_in": {
+                      "type": "integer",
+                      "description": "Время жизни токена"
+                    }
+                  },
+                  "required": [
+                    "access_token",
+                    "refresh_token",
+                    "expires_in"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-hs-catalog-refreshToken",
+        "description": "Обновление токена.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "TokenRefresh",
+            "description": "Токен, полученный для обновления",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Авторизация"
+        ]
+      }
+    },
     "/hs/catalog/v2/user": {
       "put": {
         "summary": "Создать пользователя",
@@ -708,7 +835,7 @@
       },
       "parameters": []
     },
-    "/hs/catalog/v2/items-markups - copy": {
+    "/hs/catalog/v2/items-markups": {
       "post": {
         "summary": "Наценки",
         "parameters": [],
@@ -873,25 +1000,6 @@
         "x-stoplight": {
           "id": "l7fxpn79pmpvi"
         }
-      },
-      "parameters": []
-    },
-    "/hs/catalog/v2/items-all": {
-      "get": {
-        "summary": "Номенклатура без цен",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "tags": [
-          "Номенклатура"
-        ],
-        "deprecated": true
       },
       "parameters": []
     },
