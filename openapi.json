@@ -39,8 +39,11 @@
   ],
   "paths": {
     "/hs/catalog/login": {
-      "get": {
+      "post": {
         "summary": "Получить токен",
+        "x-stoplight": {
+          "id": "c61049f00b802"
+        },
         "responses": {
           "200": {
             "description": "Ок",
@@ -107,8 +110,11 @@
       }
     },
     "/hs/catalog/refreshToken": {
-      "get": {
+      "post": {
         "summary": "Обновить токен",
+        "x-stoplight": {
+          "id": "ddf97276617bd"
+        },
         "responses": {
           "200": {
             "description": "Ок",
